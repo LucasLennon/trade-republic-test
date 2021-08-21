@@ -1,20 +1,39 @@
-@use 'sass:math';
+// @use 'sass:math';
 
-@mixin media($screenSize, $screenWidth, $limitation, $width) {
-  .#{$screenSize}-#{$width} {
-    width: #{math.div(percentage($width), 12)};
+$breakpoints: xs 0 min, sm 768 min, md 960 min, lg 1264 min, xl 1904 min;
+$directionalStylesValues: 0 2, 1 4, 2 8, 3 16, 4 32, 5 64;
+
+$marginTypes: m margin, mt margin-top, mr margin-right, mb margin-bottom, ml margin-left;
+$paddingTypes: p padding, pt padding-top, pr padding-right, pb padding-bottom, pl padding-left;
+
+// To mount margin and padding classes
+@mixin directionalStyles($screenSize, $parameterAlias, $parameter, $key, $value) {
+  .#{$screenSize}-#{$parameterAlias}-#{$key}{
+    #{$parameter}: #{$value}px;
   }
 }
-$breakpoints: xs 600 max, sm 600 min, md 960 min, lg 1264 min, xl 1904 min;
 
-@each $size, $width, $limitation in $breakpoints {
-  @media (#{$limitation}-width: #{$width}px) {
+// To mount width classes
+@mixin media($screenSize, $screenWidth, $value) {
+  .#{$screenSize}-w-#{$value} {
+    // width: #{math.div(percentage($value), 12)};
+    width: #{percentage($value)/ 12};
+  }
+}
+
+
+@each $screenSize, $screenWidth, $limitation in $breakpoints {
+  @media screen and (#{$limitation}-width: #{$screenWidth}px) {
     @for $i from 1 through 12 {
-      @include media($size, $width, $limitation, $i);
+      @include media($screenSize, $screenWidth, $i);
+    }
+    @each $key, $value in $directionalStylesValues{
+        @each $parameterAlias, $parameter in $marginTypes{
+            @include directionalStyles($screenSize, $parameterAlias, $parameter, $key, $value);
+        }
+        @each $parameterAlias, $parameter in $paddingTypes{
+            @include directionalStyles($screenSize, $parameterAlias, $parameter, $key, $value);
+        }
     }
   }
 }
-
-$primary:#4791db;
-$success:#4caf50;
-$error:#f44336;
