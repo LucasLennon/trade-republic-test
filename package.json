@@ -7,8 +7,10 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "rxjs": "^7.3.0",
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "vue-i18n": "^9.1.7"
   },
   "devDependencies": {
     "@testing-library/vue": "^5.8.2",

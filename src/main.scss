@@ -37,3 +37,7 @@ $paddingTypes: p padding, pt padding-top, pr padding-right, pb padding-bottom, p
     }
   }
 }
+
+p {
+  all: unset;
+}
