@@ -2,8 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"],
-      "locales/*": ["./locales/*"]
+      "@/*": ["./src/*"]
     },
     "target": "esnext",
     "module": "esnext",

@@ -1,0 +1,11 @@
+{
+  "isinAddButtonField": "Schaltfläche zum Hinzufügen von Isin",
+  "isinFieldLabel": "Feld zum Hinzufügen von isin",
+  "buttonStopAriaLabel": "Taste zum Stoppen von isin: { isin }",
+  "buttonRemoveAriaLabel": "Schaltfläche zum Entfernen von isin: { isin }",
+  "buttonAdd": "Hinzufügen",
+  "buttonRemove": "Zu entfernen",
+  "buttonStop": "Stoppen",
+  "connectionOffline": "Offline",
+  "connectionOnline": "Online"
+}

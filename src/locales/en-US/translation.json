@@ -1,0 +1,11 @@
+{
+  "isinAddButtonField": "Button to Add the Isin",
+  "isinFieldLabel": "Field to Add the Isin",
+  "buttonStopAriaLabel": "Button to unsubscribe isin: { isin }",
+  "buttonRemoveAriaLabel": "Button to remove isin: { isin }",
+  "buttonAdd": "Add",
+  "buttonRemove": "Remove",
+  "buttonStop": "Stop",
+  "connectionOffline": "Offline",
+  "connectionOnline": "Online"
+}
