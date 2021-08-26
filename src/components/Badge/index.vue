@@ -6,17 +6,21 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+interface Props {
+  variation: 'disabled' | 'success' | 'error' | string;
+}
+
 export default defineComponent({
   name: 'Badge',
   props: {
     variation: {
-      validator(value) {
+      validator(value: string) {
         return ['disabled', 'success', 'error'].includes(value);
       },
       default: 'disabled',
     },
   },
-  setup(props, context) {
+  setup(props: Props, context) {
     return {
       classObject: {
         disabled: props.variation === 'disabled',

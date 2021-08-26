@@ -1,11 +1,18 @@
 <template>
-  <button :class="classObject" :style="style" :type="type">
+  <button :class="classObject" :style="style" :disabled="disabled" type="button">
     <slot />
   </button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
+interface Component {
+  color: string;
+  fontWeight: string;
+  variation: string;
+}
+
 export default defineComponent({
   name: 'Button',
   props: {
@@ -19,23 +26,18 @@ export default defineComponent({
       required: false,
       default: '600',
     },
-    type: {
-      type: String,
-      required: false,
-      default: 'button',
-    },
     variation: {
-      required: false,
       default: 'primary',
-      validator(value) {
+      validator(value: string) {
         return ['primary', 'error', 'success'].includes(value);
       },
     },
   },
-  setup(props) {
+  setup(props: Component, { attrs }) {
     return {
       classObject: { [props.variation]: !!props.variation },
       style: { color: props.color, fontWeight: props.fontWeight },
+      disabled: attrs.disabled,
     };
   },
 });
@@ -52,6 +54,10 @@ $buttonTypes: primary $primary, success $success, error $error;
 @each $class, $value in $buttonTypes {
   button.#{$class} {
     background: $value;
+    &:disabled {
+      background: grey;
+      cursor: none;
+    }
   }
 }
 </style>

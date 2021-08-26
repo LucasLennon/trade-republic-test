@@ -10,8 +10,7 @@
           :aria-label="$t('buttonStopAriaLabel', { isin })"
           @click="$emit('unsubscribe', isin)"
         >
-          {{ $t('buttonStopAriaLabel', { isin }) }}
-          <!-- {{ $t('buttonStop') }} -->
+          {{ $t('buttonStop') }}
         </Button>
         <Button
           v-if="!subscribed"
@@ -19,8 +18,7 @@
           variation="error"
           @click="$emit('remove', isin)"
         >
-          {{ $t('buttonRemoveAriaLabel', { isin }) }}
-          <!-- {{ $t('buttonRemove') }} -->
+          {{ $t('buttonRemove') }}
         </Button>
       </Box>
     </Flex>
@@ -43,11 +41,11 @@ export default defineComponent({
     },
     price: {
       type: String,
-      required: false,
+      default: '',
     },
     subscribed: {
       type: Boolean,
-      required: true,
+      default: true,
     },
   },
   emits: ['remove', 'unsubscribe'],

@@ -7,8 +7,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Box from '@/components/Box/index.vue';
-import { marginPropsStyle } from '@/props/margin';
-import { paddingPropsStyle } from '@/props/padding';
 
 export default defineComponent({
   name: 'Flex',
@@ -38,8 +36,6 @@ export default defineComponent({
   setup(props) {
     return {
       style: {
-        ...marginPropsStyle(props),
-        ...paddingPropsStyle(props),
         alignItems: props.alignItems,
         justifyContent: props.justifyContent,
         flexWrap: props.flexWrap,

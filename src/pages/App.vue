@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <Flex flex-wrap="wrap" justify-content="space-between" p=".5rem">
+  <Layout>
+    <Flex class="xs-p-2" flex-wrap="wrap" justify-content="space-between">
       <Box class="xs-w-12 xs-mb-2 sm-w-11">
-        <IsinForm @subscribe="subscribeToIsin" />
+        <IsinForm :disable-form="formConfigurations.disabled" @subscribe="subscribeToIsin" />
       </Box>
       <Flex align-items="center" class="sm-w-1">
         <Badge
@@ -18,7 +18,10 @@
       </Flex>
     </Flex>
     <Flex flex-wrap="wrap">
-      <Box v-for="item in list" :key="item.isin" xs="12" sm="6" md="4" lg="3" xl="2">
+      <Flex class="xs-w-12" flex-direction="row-reverse">
+        Max Isins: {{ list.length }}/{{ formConfigurations.max }}
+      </Flex>
+      <Box v-for="item in list" :key="item.isin" class="xs-w-12 sm-w-6 md-w-4 lg-w-3 xl-w-2">
         <IsinCard
           :isin="item.isin"
           :price="item.price"
@@ -28,13 +31,14 @@
         />
       </Box>
     </Flex>
-  </div>
+  </Layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { ref, reactive, watch, defineComponent } from 'vue';
 
 import { useWebSocket } from '@/composables';
+import Layout from '@/layouts/index.vue';
 import IsinCard from '@/components/IsinCard/index.vue';
 import IsinForm from '@/components/IsinForm/index.vue';
 
@@ -43,14 +47,33 @@ export default defineComponent({
   components: {
     IsinCard,
     IsinForm,
+    Layout,
   },
   setup() {
     const { connection, list, webSocket, removeIsinFromList, subscribeToIsin, unsubscribeToIsin } =
       useWebSocket();
 
+    const formConfigurations = reactive({
+      disabled: ref(false),
+      max: 10,
+    });
+
+    watch(
+      () => list.value.length,
+      (value) => {
+        if (value >= formConfigurations.max) {
+          formConfigurations.disabled = true;
+          return;
+        }
+        formConfigurations.disabled = false;
+        return;
+      }
+    );
+
     return {
       connection,
       list,
+      formConfigurations,
       webSocket,
       removeIsinFromList,
       subscribeToIsin,

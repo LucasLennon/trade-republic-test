@@ -1,19 +1,15 @@
 <template>
-  <div :class="classObject" :style="style">
+  <div :class="classObject">
     <slot />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { marginPropsDefinition, marginPropsStyle } from '@/props/margin';
-import { paddingPropsDefinition, paddingPropsStyle } from '@/props/padding';
 
 export default defineComponent({
   name: 'Box',
   props: {
-    ...marginPropsDefinition,
-    ...paddingPropsDefinition,
     xs: {
       type: String,
       required: false,
@@ -46,7 +42,6 @@ export default defineComponent({
 
     return {
       classObject,
-      style: { ...marginPropsStyle(props), ...paddingPropsStyle(props) },
     };
   },
 });

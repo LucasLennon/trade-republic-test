@@ -1,5 +1,5 @@
 <template>
-  <div :class="classObject">
+  <div>
     <slot />
   </div>
 </template>
@@ -12,13 +12,6 @@ import Box from '@/components/Box/index.vue';
 export default defineComponent({
   name: 'Card',
   extends: Box,
-  setup(props, context) {
-    return {
-      classObject: context.attrs.class.split(/\s/).map((item) => {
-        return { [item]: true };
-      }),
-    };
-  },
 });
 </script>
 
